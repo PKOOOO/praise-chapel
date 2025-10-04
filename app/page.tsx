@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -9,6 +9,29 @@ export default function Home() {
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
+
+  useEffect(() => {
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate-in');
+        }
+      });
+    }, observerOptions);
+
+    // Observe all elements with scroll-animate class
+    const elements = document.querySelectorAll('.scroll-animate');
+    elements.forEach((el) => observer.observe(el));
+
+    return () => {
+      elements.forEach((el) => observer.unobserve(el));
+    };
+  }, []);
 
   return (
     <div className="min-h-screen">
@@ -145,11 +168,11 @@ export default function Home() {
       {/* Welcome Section */}
       <section className="section-padding bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
+          <div className="text-center mb-16 scroll-animate fade-up">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">Welcome</h2>
             <div className="w-24 h-1 bg-primary mx-auto mb-8"></div>
           </div>
-          <div className="max-w-4xl mx-auto text-center">
+          <div className="max-w-4xl mx-auto text-center scroll-animate fade-up delay-200">
             <p className="text-lg text-gray-700 leading-relaxed">
               Welcome, and thank you for visiting Praise Chapel. We hope that our website highlights the wide variety of worship, fellowship and service opportunities available. Please feel free to read more about our church on this site, or come in for a visit. We would love to greet you and share with you our love for Jesus Christ and for you, our neighbor.
             </p>
@@ -161,14 +184,14 @@ export default function Home() {
       <section className="section-padding">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-2 gap-12">
-            <div className="text-center scroll-animate hover-lift">
+            <div className="text-center scroll-animate fade-left hover-lift">
               <h3 className="text-3xl font-bold text-gray-900 mb-6">Our Mission</h3>
               <div className="w-16 h-1 bg-primary mx-auto mb-6"></div>
               <p className="text-lg text-gray-700">
                 To raise up passionate worshippers who excellently and faithfully love God
               </p>
             </div>
-            <div className="text-center scroll-animate hover-lift delay-200">
+            <div className="text-center scroll-animate fade-right hover-lift delay-200">
               <h3 className="text-3xl font-bold text-gray-900 mb-6">Our Vision</h3>
               <div className="w-16 h-1 bg-secondary mx-auto mb-6"></div>
               <p className="text-lg text-gray-700">
@@ -182,11 +205,11 @@ export default function Home() {
       {/* History Section */}
       <section className="section-padding bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
+          <div className="text-center mb-16 scroll-animate fade-up">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">Our History</h2>
             <div className="w-24 h-1 bg-primary mx-auto mb-8"></div>
           </div>
-          <div className="max-w-4xl mx-auto">
+          <div className="max-w-4xl mx-auto scroll-animate slide-up delay-200">
             <p className="text-lg text-gray-700 leading-relaxed mb-6">
               The Praise Chapel was laid in the heart of Bishop. Tee Nalo and his wife Pst. Liz towards the end of 2007, while serving as the associate pastor at the Mombasa Pentecostal Church. Bishop. Tee officially resigned from Mombasa Pentecostal Church to pursue the dream of starting Praise Chapel.
             </p>
@@ -203,12 +226,12 @@ export default function Home() {
       {/* Presiding Bishop Section */}
       <section className="section-padding">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
+          <div className="text-center mb-16 scroll-animate fade-up">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">Presiding Bishop</h2>
             <div className="w-24 h-1 bg-primary mx-auto mb-8"></div>
           </div>
-          <div className="max-w-4xl mx-auto">
-            <div className="bg-white p-8 rounded-lg shadow-lg">
+          <div className="max-w-4xl mx-auto scroll-animate scale-in delay-200">
+            <div className="bg-white p-8 rounded-lg shadow-lg hover-lift">
               <p className="text-lg text-gray-700 leading-relaxed mb-6">
                 Bishop Tee Nalo was born on May 7th 1966 to Rev. and Mrs. Otieno. He grew up in Mombasa Kenya, where he got his formal education. Upon completion of high school, he worked with British American Insurance Company for a short stint. The call of the Lord to full time ministry was heavy upon his heart in 1989 and in September of that year he joined Pan African Christian University and graduated with a B.A. in Bible and Theology.
               </p>
@@ -223,7 +246,7 @@ export default function Home() {
       {/* Leadership Team Section */}
       <section className="section-padding bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
+          <div className="text-center mb-16 scroll-animate fade-up">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">Praise Chapel Leadership</h2>
             <div className="w-24 h-1 bg-primary mx-auto mb-8"></div>
             <p className="text-lg text-gray-700 max-w-3xl mx-auto">
@@ -232,7 +255,7 @@ export default function Home() {
           </div>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div className="bg-white p-6 rounded-lg shadow-lg text-center hover-lift">
+            <div className="bg-white p-6 rounded-lg shadow-lg text-center scroll-animate zoom-in hover-lift">
               <div className="w-24 h-24 rounded-full mx-auto mb-4 overflow-hidden">
                 <Image
                   src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face"
@@ -246,7 +269,7 @@ export default function Home() {
               <p className="text-primary font-semibold">Presiding Bishop, Praise Chapel</p>
             </div>
 
-            <div className="bg-white p-6 rounded-lg shadow-lg text-center hover-lift">
+            <div className="bg-white p-6 rounded-lg shadow-lg text-center scroll-animate zoom-in delay-100 hover-lift">
               <div className="w-24 h-24 rounded-full mx-auto mb-4 overflow-hidden">
                 <Image
                   src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face"
@@ -260,7 +283,7 @@ export default function Home() {
               <p className="text-primary font-semibold">The Managing Director, Alwenya & Co. Advocates</p>
             </div>
 
-            <div className="bg-white p-6 rounded-lg shadow-lg text-center hover-lift">
+            <div className="bg-white p-6 rounded-lg shadow-lg text-center scroll-animate zoom-in delay-200 hover-lift">
               <div className="w-24 h-24 rounded-full mx-auto mb-4 overflow-hidden">
                 <Image
                   src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=150&h=150&fit=crop&crop=face"
@@ -274,7 +297,7 @@ export default function Home() {
               <p className="text-primary font-semibold">The Managing Director, Savannah Medical Clinic</p>
             </div>
 
-            <div className="bg-white p-6 rounded-lg shadow-lg text-center hover-lift">
+            <div className="bg-white p-6 rounded-lg shadow-lg text-center scroll-animate zoom-in delay-300 hover-lift">
               <div className="w-24 h-24 rounded-full mx-auto mb-4 overflow-hidden">
                 <Image
                   src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop&crop=face"
@@ -288,7 +311,7 @@ export default function Home() {
               <p className="text-primary font-semibold">Speaker, Kwale County</p>
             </div>
 
-            <div className="bg-white p-6 rounded-lg shadow-lg text-center hover-lift">
+            <div className="bg-white p-6 rounded-lg shadow-lg text-center scroll-animate zoom-in delay-400 hover-lift">
               <div className="w-24 h-24 rounded-full mx-auto mb-4 overflow-hidden">
                 <Image
                   src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=150&h=150&fit=crop&crop=face"
@@ -308,7 +331,7 @@ export default function Home() {
       {/* Statement of Fundamental Beliefs Section */}
       <section className="section-padding">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
+          <div className="text-center mb-16 scroll-animate fade-up">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">Statement of Fundamental Beliefs</h2>
             <div className="w-24 h-1 bg-primary mx-auto mb-8"></div>
             <p className="text-lg text-gray-700 max-w-3xl mx-auto">
@@ -317,49 +340,49 @@ export default function Home() {
           </div>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div className="bg-white p-6 rounded-lg shadow-lg hover-lift">
+            <div className="bg-white p-6 rounded-lg shadow-lg scroll-animate rotate-in hover-lift">
               <h3 className="text-xl font-bold text-primary mb-4">THE CHURCH</h3>
               <p className="text-gray-700">
                 We believe that the church consists of all persons who have been regenerated by the Holy Spirit and made new creatures in Christ Jesus.
               </p>
             </div>
 
-            <div className="bg-white p-6 rounded-lg shadow-lg hover-lift">
+            <div className="bg-white p-6 rounded-lg shadow-lg scroll-animate rotate-in delay-100 hover-lift">
               <h3 className="text-xl font-bold text-primary mb-4">THE SAVIOUR</h3>
               <p className="text-gray-700">
                 We believe that all have sinned and come short of the glory of God and that through the death and risen power of Christ all who believe in him can be saved from the penalty and power of sin.
               </p>
             </div>
 
-            <div className="bg-white p-6 rounded-lg shadow-lg hover-lift">
+            <div className="bg-white p-6 rounded-lg shadow-lg scroll-animate rotate-in delay-200 hover-lift">
               <h3 className="text-xl font-bold text-primary mb-4">THE TRINITY</h3>
               <p className="text-gray-700">
                 We believe that the Godhead eternally exists in three persons, Father, Son and Holy Ghost, and that these three are one God.
               </p>
             </div>
 
-            <div className="bg-white p-6 rounded-lg shadow-lg hover-lift">
+            <div className="bg-white p-6 rounded-lg shadow-lg scroll-animate rotate-in delay-300 hover-lift">
               <h3 className="text-xl font-bold text-primary mb-4">THE BIBLE</h3>
               <p className="text-gray-700">
                 We believe that the Bible is the inspired Word of God and that none may add there to or take there from except at their peril.
               </p>
             </div>
 
-            <div className="bg-white p-6 rounded-lg shadow-lg hover-lift">
+            <div className="bg-white p-6 rounded-lg shadow-lg scroll-animate rotate-in delay-400 hover-lift">
               <h3 className="text-xl font-bold text-primary mb-4">THE BAPTISER</h3>
               <p className="text-gray-700">
                 We believe that our Lord Jesus Christ is the Baptizer in the Holy Spirit, and that this baptism followed with the initial sign of speaking in other tongues is promised to every believer.
               </p>
             </div>
 
-            <div className="bg-white p-6 rounded-lg shadow-lg hover-lift">
+            <div className="bg-white p-6 rounded-lg shadow-lg scroll-animate rotate-in delay-500 hover-lift">
               <h3 className="text-xl font-bold text-primary mb-4">THE COMING KING</h3>
               <p className="text-gray-700">
                 We believe in the personal and pre millennial return of our Lord Jesus Christ to receive unto Himself the Church, and afterwards to set up His throne as King.
               </p>
             </div>
 
-            <div className="bg-white p-6 rounded-lg shadow-lg hover-lift md:col-span-2 lg:col-span-3">
+            <div className="bg-white p-6 rounded-lg shadow-lg scroll-animate bounce-in delay-600 hover-lift md:col-span-2 lg:col-span-3">
               <h3 className="text-xl font-bold text-primary mb-4">THE HEALER</h3>
               <p className="text-gray-700">
                 We believe that our Lord Jesus Christ is the healer of the body and that all who walk in obedience to his will can claim divine healing for their bodies.
@@ -372,14 +395,14 @@ export default function Home() {
       {/* Services Section */}
       <section id="services" className="section-padding">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
+          <div className="text-center mb-16 scroll-animate fade-up">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">Services</h2>
             <div className="w-24 h-1 bg-primary mx-auto mb-8"></div>
             <p className="text-lg text-gray-700">Services are held in the main Church</p>
           </div>
           
           <div className="grid md:grid-cols-2 gap-12">
-            <div className="bg-white p-8 rounded-lg shadow-lg hover-lift">
+            <div className="bg-white p-8 rounded-lg shadow-lg scroll-animate fade-left hover-lift">
               <h3 className="text-2xl font-bold text-primary mb-6">Sunday Services</h3>
               <ul className="space-y-4 text-gray-700">
                 <li className="flex items-center">
@@ -405,7 +428,7 @@ export default function Home() {
               </ul>
             </div>
 
-            <div className="bg-white p-8 rounded-lg shadow-lg hover-lift">
+            <div className="bg-white p-8 rounded-lg shadow-lg scroll-animate fade-right delay-200 hover-lift">
               <h3 className="text-2xl font-bold text-primary mb-6">Weekday Services</h3>
               <ul className="space-y-4 text-gray-700">
                 <li className="flex items-center">
@@ -424,7 +447,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="mt-12 bg-primary text-white p-8 rounded-lg">
+          <div className="mt-12 bg-primary text-white p-8 rounded-lg scroll-animate slide-up delay-400">
             <h3 className="text-2xl font-bold mb-6">Tuesday School of Ministry Offerings</h3>
             <div className="grid md:grid-cols-2 gap-6">
               <ul className="space-y-3">

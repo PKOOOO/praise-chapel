@@ -50,7 +50,7 @@ html {
 @keyframes fadeInUp {
   from {
     opacity: 0;
-    transform: translateY(30px);
+    transform: translateY(50px);
   }
   to {
     opacity: 1;
@@ -61,7 +61,7 @@ html {
 @keyframes fadeInLeft {
   from {
     opacity: 0;
-    transform: translateX(-30px);
+    transform: translateX(-50px);
   }
   to {
     opacity: 1;
@@ -72,7 +72,7 @@ html {
 @keyframes fadeInRight {
   from {
     opacity: 0;
-    transform: translateX(30px);
+    transform: translateX(50px);
   }
   to {
     opacity: 1;
@@ -83,9 +83,71 @@ html {
 @keyframes scaleIn {
   from {
     opacity: 0;
-    transform: scale(0.9);
+    transform: scale(0.8);
   }
   to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes zoomIn {
+  from {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes rotateIn {
+  from {
+    opacity: 0;
+    transform: rotate(-10deg) scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: rotate(0deg) scale(1);
+  }
+}
+
+@keyframes bounceIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+  70% {
+    transform: scale(0.9);
+  }
+  100% {
     opacity: 1;
     transform: scale(1);
   }
@@ -100,38 +162,92 @@ html {
   }
 }
 
-/* Animation classes */
-.animate-fade-in-up {
-  animation: fadeInUp 0.8s ease-out forwards;
-}
-
-.animate-fade-in-left {
-  animation: fadeInLeft 0.8s ease-out forwards;
-}
-
-.animate-fade-in-right {
-  animation: fadeInRight 0.8s ease-out forwards;
-}
-
-.animate-scale-in {
-  animation: scaleIn 0.6s ease-out forwards;
-}
-
-.animate-pulse-slow {
-  animation: pulse 2s ease-in-out infinite;
-}
-
 /* Scroll-triggered animations */
 .scroll-animate {
   opacity: 0;
-  transform: translateY(30px);
-  transition: all 0.8s ease-out;
+  transform: translateY(50px);
+  transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-.scroll-animate.animate {
+.scroll-animate.animate-in {
   opacity: 1;
   transform: translateY(0);
 }
+
+/* Different animation types */
+.scroll-animate.fade-up {
+  transform: translateY(50px);
+}
+
+.scroll-animate.fade-up.animate-in {
+  transform: translateY(0);
+}
+
+.scroll-animate.fade-left {
+  transform: translateX(-50px);
+}
+
+.scroll-animate.fade-left.animate-in {
+  transform: translateX(0);
+}
+
+.scroll-animate.fade-right {
+  transform: translateX(50px);
+}
+
+.scroll-animate.fade-right.animate-in {
+  transform: translateX(0);
+}
+
+.scroll-animate.scale-in {
+  transform: scale(0.8);
+}
+
+.scroll-animate.scale-in.animate-in {
+  transform: scale(1);
+}
+
+.scroll-animate.slide-up {
+  transform: translateY(100px);
+}
+
+.scroll-animate.slide-up.animate-in {
+  transform: translateY(0);
+}
+
+.scroll-animate.zoom-in {
+  transform: scale(0.5);
+}
+
+.scroll-animate.zoom-in.animate-in {
+  transform: scale(1);
+}
+
+.scroll-animate.rotate-in {
+  transform: rotate(-10deg) scale(0.8);
+}
+
+.scroll-animate.rotate-in.animate-in {
+  transform: rotate(0deg) scale(1);
+}
+
+.scroll-animate.bounce-in {
+  transform: scale(0.3);
+}
+
+.scroll-animate.bounce-in.animate-in {
+  animation: bounceIn 0.8s ease-out forwards;
+}
+
+/* Staggered animation delays */
+.scroll-animate.delay-100 { transition-delay: 0.1s; }
+.scroll-animate.delay-200 { transition-delay: 0.2s; }
+.scroll-animate.delay-300 { transition-delay: 0.3s; }
+.scroll-animate.delay-400 { transition-delay: 0.4s; }
+.scroll-animate.delay-500 { transition-delay: 0.5s; }
+.scroll-animate.delay-600 { transition-delay: 0.6s; }
+.scroll-animate.delay-700 { transition-delay: 0.7s; }
+.scroll-animate.delay-800 { transition-delay: 0.8s; }
 
 /* Hover animations */
 .hover-lift {
